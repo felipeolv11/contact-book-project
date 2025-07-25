@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace ContactBook
 {
@@ -110,6 +110,62 @@ namespace ContactBook
             }
         }
 
+        static void ListContacts(List<Contact> contacts)
+        {
+            AscArt();
+
+            if (contacts.Count > 0)
+            {
+                Console.WriteLine(">>> CONTACT LIST\n");
+
+                foreach (var contact in contacts)
+                {
+                    Thread.Sleep(200);
+                    Console.WriteLine($"NAME: {contact.name} | PHONE: {contact.phone} | EMAIL: {contact.email} | ADDRESS: {contact.address}");
+                }
+                Console.ReadLine();
+            }
+
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nNO CONTACTS FOUND.");
+                Console.WriteLine("PLEASE ADD SOME CONTACTS FIRST.");
+                Console.ReadLine();
+            }
+        }
+
+        static void SearchContact(List<Contact> contacts)
+        {
+            AscArt();
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("> ENTER CONTACT NAME: ");
+            Console.ResetColor();
+            string name = Console.ReadLine();
+
+            bool found = false;
+
+            foreach (var contact in contacts)
+            {
+                if (contact.name.Equals(name))
+                {
+                    Console.WriteLine($"\nNAME: {contact.name} | PHONE: {contact.phone} | EMAIL: {contact.email} | ADDRESS: {contact.address}");
+                    Console.ReadLine();
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nCONTACT NOT FOUND.");
+                Console.WriteLine("PLEASE TRY AGAIN.");
+                Console.ReadLine();
+            }
+        }
+
         static void UpdateContact(List<Contact> contacts)
         {
             AscArt();
@@ -155,7 +211,7 @@ namespace ContactBook
                 Console.ReadLine();
             }
         }
-
+        
         static void DeleteContact(List<Contact> contacts)
         {
             AscArt();
@@ -185,62 +241,6 @@ namespace ContactBook
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\nCONTACT NOT FOUND.");
                 Console.WriteLine("PLEASE TRY AGAIN.");
-                Console.ReadLine();
-            }
-        }
-
-        static void SearchContact(List<Contact> contacts)
-        {
-            AscArt();
-
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write("> ENTER CONTACT NAME: ");
-            Console.ResetColor();
-            string name = Console.ReadLine();
-
-            bool found = false;
-
-            foreach (var contact in contacts)
-            {
-                if (contact.name.Equals(name))
-                {
-                    Console.WriteLine($"\nNAME: {contact.name} | PHONE: {contact.phone} | EMAIL: {contact.email} | ADDRESS: {contact.address}");
-                    Console.ReadLine();
-                    found = true;
-                    break;
-                }
-            }
-
-            if (!found)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nCONTACT NOT FOUND.");
-                Console.WriteLine("PLEASE TRY AGAIN.");
-                Console.ReadLine();
-            }
-        }
-
-        static void ListContacts(List<Contact> contacts)
-        {
-            AscArt();
-
-            if (contacts.Count > 0)
-            {
-                Console.WriteLine(">>> CONTACT LIST\n");
-
-                foreach (var contact in contacts)
-                {
-                    Thread.Sleep(200);
-                    Console.WriteLine($"NAME: {contact.name} | PHONE: {contact.phone} | EMAIL: {contact.email} | ADDRESS: {contact.address}");
-                }
-                Console.ReadLine();
-            }
-
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nNO CONTACTS FOUND.");
-                Console.WriteLine("PLEASE ADD SOME CONTACTS FIRST.");
                 Console.ReadLine();
             }
         }
